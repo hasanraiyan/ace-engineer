@@ -7,25 +7,28 @@ import SemesterScreen from './screens/SemesterScreen';
 import SubjectScreen from './screens/SubjectScreen';
 import SyllabusScreen from './screens/SyllabusScreen';
 
+import { DataProvider } from "./context/DataContext";
+
 const Stack = createNativeStackNavigator();
 
 const App = () => {
     return (
-
-        <NavigationContainer >
-            <Stack.Navigator
-                initialRouteName="Home"
-                screenOptions={
-                    {
-                        headerShown: false,
-                    }
-                }>
-                <Stack.Screen name="Home" component={HomeScreen} />
-                <Stack.Screen name="Semester" component={SemesterScreen} />
-                <Stack.Screen name="Subject" component={SubjectScreen} />
-                <Stack.Screen name="Syllabus" component={SyllabusScreen} />
-            </Stack.Navigator>
-        </NavigationContainer>
+        <DataProvider>
+            <NavigationContainer >
+                <Stack.Navigator
+                    initialRouteName="Home"
+                    screenOptions={
+                        {
+                            headerShown: false,
+                        }
+                    }>
+                    <Stack.Screen name="Home" component={HomeScreen} />
+                    <Stack.Screen name="Semester" component={SemesterScreen} />
+                    <Stack.Screen name="Subject" component={SubjectScreen} />
+                    <Stack.Screen name="Syllabus" component={SyllabusScreen} />
+                </Stack.Navigator>
+            </NavigationContainer>
+        </DataProvider>
     )
 }
 

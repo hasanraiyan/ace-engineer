@@ -1,77 +1,31 @@
-import React, { useEffect, useState } from 'react';
-import { View, Text, ScrollView, Alert, Button, ActivityIndicator, StyleSheet, TouchableOpacity, SafeAreaView } from 'react-native';
-import { fetchFromRemote, getData } from '../services/dataService'; // Assuming getData fetches data
+import React, { useContext, useEffect, useState } from 'react';
+import { View, Text, ScrollView, Alert, ActivityIndicator, StyleSheet, TouchableOpacity, SafeAreaView } from 'react-native';
 import { FontAwesome5 } from '@expo/vector-icons';
 import { StatusBar } from 'expo-status-bar';
+import DataContext from '../context/DataContext';
 
-const HomeScreen = () => {
-    const [data, setData] = useState(null);
-    const [error, setError] = useState(null);
-    const [loading, setLoading] = useState(false);
+
+const HomeScreen = ({ navigation }) => {
+    const { data, loading, error, updateData } = useContext(DataContext);
 
     const [headerHeight, setHeaderHeight] = useState(0);
     const scrollContentStyle = {
-        marginTop: headerHeight,
+        marginTop: headerHeight + 20,
     };
-
-
+    console.log("step 1")
     useEffect(() => {
-        fetchData();
-    }, []);
+        console.log("Data in HomeScreen:", data);  
+    }, [data]);
 
-    const fetchData = async () => {
-        setLoading(true);
-        setError(null);
-
-        try {
-            const result = await getData();
-            if (result) {
-                setData(result);
-            } else {
-                setError('Failed to fetch data.');
-            }
-        } catch (err) {
-            setError(err.message || 'An unexpected error occurred.');
-        } finally {
-            setLoading(false);
-        }
-    };
-
-    const updateData = async () => {
-        Alert.alert(
-            'Update Data',
-            'Do you want to update the data from the server?',
-            [
-                {
-                    text: 'Cancel',
-                    style: 'cancel',
-                },
-                {
-                    text: 'Update',
-                    onPress: async () => {
-                        setLoading(true);
-                        setError(null);
-
-                        try {
-                            const updatedData = await fetchFromRemote();
-                            if (updatedData) {
-                                setData(updatedData);
-                                Alert.alert('Success', 'Data has been updated successfully!');
-                            } else {
-                                setError('Failed to update data. Please try again.');
-                            }
-                        } catch (err) {
-                            console.error('Error during data update:', err);
-                            setError('Failed to update data. Please try again.');
-                        } finally {
-                            setLoading(false);
-                        }
-                    },
-                },
-            ]
-        );
-    };
-
+    console.log("step 2")
+    
+    const BranchCard = () => {
+        return (
+            <TouchableOpacity style={[styles.branchCardContainer, { backgroundColor: 'red', flex: 1, justifyContent: 'center', alignItems: 'center' }]} >
+                <Text>{"name not foundms lorem50kfjhdljksfgjksdh kgsdfkh isfdh glksfdhlk sfhk hlkdfhlksfdh gksfdglksdfhgksdfhglksfdhgksfjdhlkdfk p93wthodsfhgksdngksdfvksfdbsfkdgsfkdnksdffbksdfboerhgergoserg kfbksfdblkfdlkdfk fkd kdsfj glksfdhgksfdg lksnvksf nejnvlskdvlksfdjvlksdfv;sdfnvlksf djvksfdnlks dgksdg nksdfglksdfgkdfhbsfkdgsfkdnksdffbksdfboerhgergoserg kfbksfdblkfdlkdfk fkd kdsfj glksfdhgksfdg lksnvksf nejnvlskdvlksfdjvlksdfv;sdfnvlksf djvksfdnlks dgksdg nksdfglksdfgkdfhbsfkdgsfkdnksdffbksdfboerhgergoserg kfbksfdblkfdlkdfk fkd kdsfj glksfdhgksfdg lksnvksf nejnvlskdvlksfdjvlksdfv;sdfnvlksf djvksfdnlks dgksdg nksdfglksdfgkdfhbsfkdgsfkdnksdffbksdfboerhgergoserg kfbksfdblkfdlkdfk fkd kdsfj glksfdhgksfdg lksnvksf nejnvlskdvlksfdjvlksdfv;sdfnvlksf djvksfdnlks dgksdg nksdfglksdfgkdfhbsfkdgsfkdnksdffbksdfboerhgergoserg kfbksfdblkfdlkdfk fkd kdsfj glksfdhgksfdg lksnvksf nejnvlskdvlksfdjvlksdfv;sdfnvlksf djvksfdnlks dgksdg nksdfglksdfgkdfhbsfkdgsfkdnksdffbksdfboerhgergoserg kfbksfdblkfdlkdfk fkd kdsfj glksfdhgksfdg lksnvksf nejnvlskdvlksfdjvlksdfv;sdfnvlksf djvksfdnlks dgksdg nksdfglksdfgkdfhbsfkdgsfkdnksdffbksdfboerhgergoserg kfbksfdblkfdlkdfk fkd kdsfj glksfdhgksfdg lksnvksf nejnvlskdvlksfdjvlksdfv;sdfnvlksf djvksfdnlks dgksdg nksdfglksdfgkdfhbsfkdgsfkdnksdffbksdfboerhgergoserg kfbksfdblkfdlkdfk fkd kdsfj glksfdhgksfdg lksnvksf nejnvlskdvlksfdjvlksdfv;sdfnvlksf djvksfdnlks dgksdg nksdfglksdfgkdfhbsfkdgsfkdnksdffbksdfboerhgergoserg kfbksfdblkfdlkdfk fkd kdsfj glksfdhgksfdg lksnvksf nejnvlskdvlksfdjvlksdfv;sdfnvlksf djvksfdnlks dgksdg nksdfglksdfgkdfhbsfkdgsfkdnksdffbksdfboerhgergoserg kfbksfdblkfdlkdfk fkd kdsfj glksfdhgksfdg lksnvksf nejnvlskdvlksfdjvlksdfv;sdfnvlksf djvksfdnlks dgksdg nksdfglksdfgkdfh"}</Text>
+            </TouchableOpacity>
+        )
+    }
 
     if (loading) {
         return (
@@ -81,7 +35,6 @@ const HomeScreen = () => {
             </View>
         )
     }
-
 
     if (error) {
         return (
@@ -122,14 +75,32 @@ const HomeScreen = () => {
             >
                 {data && data.branches && data?.branches?.map((branch, index) => {
                     return (
-                        console.table([branch, index])
+                        <View key={index}>
+
+                            <BranchCard
+                                key={index}
+                                branch={branch}
+                                onPress={() => {
+                                    if (data) {
+                                        navigation.navigate('Semester', { branch: branch.name, data: data });
+                                    } else {
+                                        console.warn('Data is not yet loaded, navigation prevented.');
+                                    }
+                                }}
+                            />
+
+                        </View>
                     )
                 })}
-                <Text>Data: {JSON.stringify(data)}</Text>
+
+                <BranchCard
+
+                />
+                {/* <Text>Data: {JSON.stringify(data)}</Text> */}
             </ScrollView>
 
             <TouchableOpacity style={styles.floatingBtn} onPress={updateData}>
-                <FontAwesome5 name="sync-alt" size={24} color="#fff" /> 
+                <FontAwesome5 name="sync-alt" size={24} color="#fff" />
             </TouchableOpacity>
         </SafeAreaView>
     );
@@ -220,7 +191,9 @@ const styles = StyleSheet.create({
         backgroundColor: '#f7f9fc',
     },
     scrollContent: {
-    }
+    },
+
+
 })
 
 export default HomeScreen;
