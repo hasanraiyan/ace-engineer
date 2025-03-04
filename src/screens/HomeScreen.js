@@ -11,9 +11,9 @@ const HomeScreen = () => {
 
     const [headerHeight, setHeaderHeight] = useState(0);
     const scrollContentStyle = {
-        marginTop: headerHeight, 
+        marginTop: headerHeight,
     };
-    
+
 
     useEffect(() => {
         fetchData();
@@ -55,7 +55,7 @@ const HomeScreen = () => {
                         try {
                             const updatedData = await fetchFromRemote();
                             if (updatedData) {
-                                setData(updatedData); 
+                                setData(updatedData);
                                 Alert.alert('Success', 'Data has been updated successfully!');
                             } else {
                                 setError('Failed to update data. Please try again.');
@@ -118,10 +118,19 @@ const HomeScreen = () => {
             <ScrollView
                 style={styles.scrollView}
                 showsVerticalScrollIndicator={false}
-                contentContainerStyle={[styles.scrollContent,scrollContentStyle]}
+                contentContainerStyle={[styles.scrollContent, scrollContentStyle]}
             >
+                {data && data.branches && data?.branches?.map((branch, index) => {
+                    return (
+                        console.table([branch, index])
+                    )
+                })}
                 <Text>Data: {JSON.stringify(data)}</Text>
             </ScrollView>
+
+            <TouchableOpacity style={styles.floatingBtn} onPress={updateData}>
+                <FontAwesome5 name="sync-alt" size={24} color="#fff" /> 
+            </TouchableOpacity>
         </SafeAreaView>
     );
 };
@@ -213,5 +222,5 @@ const styles = StyleSheet.create({
     scrollContent: {
     }
 })
-    
+
 export default HomeScreen;

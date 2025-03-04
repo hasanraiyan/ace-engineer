@@ -7,8 +7,6 @@ import SemesterScreen from './screens/SemesterScreen';
 import SubjectScreen from './screens/SubjectScreen';
 import SyllabusScreen from './screens/SyllabusScreen';
 
-import { DATA_URL, STORAGE_KEY } from "./constants/constants";
-
 const Stack = createNativeStackNavigator();
 
 const App = () => {
