@@ -1,31 +1,57 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, ScrollView } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 
 const DATA_URL = 'https://raw.githubusercontent.com/hasanraiyan/beu-data/refs/heads/main/data.json';
-
+const STORAGE_KEY = 'app_data_cache';
 const HomeScreen = () => {
     const [data, setData] = useState(null);
     const [error, setError] = useState(null);
+    const [loading, setLoading] = useState(null);
+
 
     const fetchData = async () => {
+        setError(null);
+        setLoading(true);
+
         try {
-            // Fetch the data from the url
+            // Try to get data from cache first
+            const cachedData = await AsyncStorage.getItem(STORAGE_KEY);
+
+            if (cachedData) {
+                const parseCachedData = JSON.parse(cachedData);
+                setData(parseCachedData);
+                console.log(`Data loaded from the cache`);
+                setLoading(false);
+                return;
+            }
+
+        } catch (cacheError) {
+            console.warn("Error accessing local cache, will try fetching from server.");
+        }
+
+        // If cache is empty or failed, fetch from network
+        try {
             const response = await fetch(DATA_URL);
 
-            // Check if the response is valid
             if (!response.ok) {
                 throw new Error(`Network response was not ok, status code: ${response.status}`);
             }
 
             const fetchedData = await response.json();
             setData(fetchedData);
+            // store the new data
+            await AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(fetchedData));
             console.log('Data fetched from remote.');
         } catch (error) {
-            // Set error state
-            setError(error.message);
-            console.error(`Error fetching remote data: ${error}`);
+            setError("Failed to fetch data from server.");
+        } finally {
+            setLoading(false);
         }
+
     };
+
 
     // Call fetchData when component mounts
     useEffect(() => {
