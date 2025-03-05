@@ -37,11 +37,14 @@ export const DataProvider = ({ children }) => {
             const updatedData = await fetchFromRemote();
             if (updatedData) {
                 setData(updatedData);
+                return true
             } else {
                 setError('Failed to update data. Please try again.');
+                return false;
             }
         } catch (err) {
             setError(err.message)
+            return false
         } finally {
             setLoading(false);
         }

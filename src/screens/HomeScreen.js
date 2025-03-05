@@ -26,7 +26,7 @@ const HomeScreen = ({ navigation }) => {
 
     const handleRetry = async () => {
         setRetryCount(retryCount + 1);
-    
+
         if (retryCount >= 2) {
             Alert.alert(
                 "Network Issue",
@@ -35,8 +35,13 @@ const HomeScreen = ({ navigation }) => {
             );
             return;
         }
-    
-        await updateData(); 
+
+        const success = await updateData();
+
+        if (success) {
+            Alert.alert("Success", "Data updated successfully!");
+            setRetryCount(0);   
+        }
     };
 
     const BranchCard = ({ branch, onPress }) => {
@@ -109,29 +114,30 @@ const HomeScreen = ({ navigation }) => {
                 contentContainerStyle={[styles.scrollContent, scrollContentStyle]}
             >
                 {data?.branches?.map((branch, index) => {                                                // console.log(branch)
-                 
+
                     console.log([index, branch.name, data]);
                     return (
-                            <BranchCard
-                                key={index}
-                                branch={branch}
-                                onPress={() => {
-                                    if (data) {
-                                        navigation.navigate('Semester', { branchName: branch.name, data: data });
-                                    } else {
-                                        console.warn('Data is not yet loaded, navigation prevented.');
-                                    }
-                                }}
-                            />
+                        <BranchCard
+                            key={index}
+                            branch={branch}
+                            onPress={() => {
+                                if (data) {
+                                    navigation.navigate('Semester', { branchName: branch.name, data: data });
+                                } else {
+                                    console.warn('Data is not yet loaded, navigation prevented.');
+                                }
+                            }}
+                        />
 
                     )
                 })}
-                
+
+
 
 
             </ScrollView>
 
-            <TouchableOpacity style={styles.floatingBtn} onPress={updateData}>
+            <TouchableOpacity style={styles.floatingBtn} onPress={handleRetry}>
                 <FontAwesome5 name="sync-alt" size={24} color="#fff" />
             </TouchableOpacity>
         </SafeAreaView>

@@ -88,7 +88,7 @@ const styles = StyleSheet.create({
     scrollContent: {
         paddingHorizontal: 16,
         paddingTop: 20,
-        paddingBottom: 10
+        paddingBottom: 20
 
     },
     branchCardContainer: {
