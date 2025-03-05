@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
         right: 0,
         backgroundColor: '#00B0FF',
         alignItems: 'flex-start',
-        paddingTop: 40,
+        paddingTop: 30,
         paddingBottom: 30,
         paddingHorizontal: 20,
         borderBottomLeftRadius: 30,
@@ -67,9 +67,10 @@ const styles = StyleSheet.create({
         marginRight: 10,
     },
     headerTitle: {
-        fontSize: 32,
+        fontSize: 28,
         fontWeight: 'bold',
         color: '#fff',
+        flexShrink: 1,          
     },
     subtitle: {
         fontSize: 18,
@@ -78,7 +79,7 @@ const styles = StyleSheet.create({
     welcomeText: {
         fontSize: 15,
         color: 'rgba(255, 255, 255, 0.8)',
-        marginTop: 10,
+        marginTop: 6,
         lineHeight: 20,
     },
     scrollView: {
@@ -127,7 +128,7 @@ const styles = StyleSheet.create({
         fontWeight: '700',
         color: '#333',
         marginBottom: 4,
-        overflow:'hidden'
+        overflow: 'hidden'
     },
     branchDescription: {
         fontSize: 14,
@@ -148,8 +149,17 @@ const styles = StyleSheet.create({
         shadowOffset: { width: 0, height: 2 },
         shadowOpacity: 0.3,
         shadowRadius: 4,
-        elevation:5,
-        zIndex:2
+        elevation: 5,
+        zIndex: 2
+    },
+    backButton: {
+        backgroundColor:'#fff',
+        height:38,
+        width:38,
+        borderRadius: 19,
+        justifyContent:'center',
+        alignItems:'center',
+        marginRight:10
     }
 })
 
