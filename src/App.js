@@ -5,7 +5,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import HomeScreen from "./screens/HomeScreen";
 import SemesterScreen from "./screens/SemesterScreen";
 import SubjectScreen from "./screens/SubjectScreen";
-import SyllabusScreen from "./screens/SyllabusScreen";
+import SyllabusScreen from "./screens/SyllabusScreen"; // Consider using lazy loading for screens
 
 // Import Context Provider
 import { DataProvider } from "./context/DataProvider";

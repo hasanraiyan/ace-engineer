@@ -3,7 +3,7 @@ import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: '#f7f9fc',
+        backgroundColor: '#f0f4f8',
         flex: 1
     },
     loadingContainer: {
@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
         marginBottom: 20,
     },
     retryButton: {
-        backgroundColor: '#2962FF',
+        backgroundColor: '#3498db',
         paddingHorizontal: 20,
         paddingVertical: 10,
         borderRadius: 8
@@ -47,7 +47,6 @@ const styles = StyleSheet.create({
         top: 0,
         left: 0,
         right: 0,
-        backgroundColor: '#00B0FF',
         alignItems: 'flex-start',
         paddingTop: 30,
         paddingBottom: 30,
@@ -63,6 +62,10 @@ const styles = StyleSheet.create({
         justifyContent: 'start',
         marginBottom: 8
     },
+    headerSubtitleContainer: {
+        marginLeft: 38,
+        transform: [{ translateY: -10 }],
+    },
     headerIcon: {
         marginRight: 10,
     },
@@ -70,7 +73,7 @@ const styles = StyleSheet.create({
         fontSize: 28,
         fontWeight: 'bold',
         color: '#fff',
-        flexShrink: 1,          
+        flexShrink: 1,
     },
     subtitle: {
         fontSize: 18,
@@ -92,8 +95,16 @@ const styles = StyleSheet.create({
         paddingBottom: 20
 
     },
+    scrollContentStyle: { // Consider moving this to styles.js
+        marginTop: 0,
+    },
     branchCardContainer: {
-        marginBottom: 16,
+        marginBottom: 8,
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.1,
+        shadowRadius: 2,
+        elevation: 2,
     },
     branchCard: {
         flexDirection: 'row',
@@ -105,10 +116,10 @@ const styles = StyleSheet.create({
         shadowColor: '#000',
         shadowOffset: {
             width: 0,
-            height: 3
+            height: 2
         },
-        shadowOpacity: 0.3,
-        shadowRadius: 8,
+        shadowOpacity: 0.15,
+        shadowRadius: 4,
         borderLeftWidth: 4
     },
 
@@ -142,26 +153,82 @@ const styles = StyleSheet.create({
         width: 50,
         height: 50,
         borderRadius: 25,
-        backgroundColor: '#2962FF',
+        backgroundColor: '#3498db',
         justifyContent: 'center',
         alignItems: 'center',
         shadowColor: '#000',
         shadowOffset: { width: 0, height: 2 },
-        shadowOpacity: 0.3,
-        shadowRadius: 4,
+        shadowOpacity: 0.2,
+        shadowRadius: 3,
         elevation: 5,
         zIndex: 2
     },
     backButton: {
-        backgroundColor:'#fff',
-        height:38,
-        width:38,
+        backgroundColor: '#fff',
+        height: 38,
+        width: 38,
         borderRadius: 19,
-        justifyContent:'center',
-        alignItems:'center',
-     
+        justifyContent: 'center',
+        alignItems: 'center',
+
         transform: [{ translateX: -8 }],
-    }
+    },
+    status: {
+        fontSize: 18,
+        fontWeight: "bold",
+    },
+    online: {
+        color: "green",
+    },
+    offline: {
+        color: "red",
+    },
+    semesterButton: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        backgroundColor: '#FFFFFF',
+        paddingVertical: 18,
+        paddingHorizontal: 20,
+        borderRadius: 16,
+       
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 3 },
+        shadowOpacity: 0.08,
+        shadowRadius: 6,
+        elevation: 3,
+        borderLeftWidth: 4,
+    },
+    semesterInfo: {
+        flex: 1,
+    },
+    semesterText: {
+        fontSize: 17,
+        fontWeight: '700',
+        color: '#333',
+        marginBottom: 4,
+    },
+    semesterDetails: {
+        fontSize: 14,
+        color: '#777',
+    },
+    semesterNumberCircle: {
+        width: 36,
+        height: 36,
+        borderRadius: 18,
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginRight: 12,
+    },
+    semesterNumber: {
+        fontSize: 16,
+        fontWeight: 'bold',
+        color:'#fff'
+    },
+    chevron: {
+        marginLeft: 5,
+    },
+
 })
 
-export default styles
+export default styles;

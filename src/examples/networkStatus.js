@@ -32,4 +32,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default App;
+export default App; // Consider moving styles to a separate file

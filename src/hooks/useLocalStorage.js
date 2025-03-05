@@ -29,7 +29,7 @@ const useLocalStorage = () => {
             }
 
         } catch (err) {
-            throw new Error(`Not found ${err}`);
+            throw new Error(`Error retrieving item with key "${key}": ${err.message}`);
         }
     }
 
