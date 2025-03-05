@@ -159,7 +159,8 @@ const styles = StyleSheet.create({
         borderRadius: 19,
         justifyContent:'center',
         alignItems:'center',
-        marginRight:10
+     
+        transform: [{ translateX: -8 }],
     }
 })
 

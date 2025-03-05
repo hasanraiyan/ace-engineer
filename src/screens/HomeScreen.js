@@ -2,17 +2,14 @@ import React, { useContext, useEffect, useState } from 'react';
 import { View, Text, ScrollView, Alert, ActivityIndicator, TouchableOpacity, SafeAreaView } from 'react-native';
 import { FontAwesome5 } from '@expo/vector-icons';
 import { StatusBar } from 'expo-status-bar';
-import DataContext from '../context/DataContext';
+import { DataContext } from '../context/DataProvider';
 import styles from '../styles/style'
 
 
 const HomeScreen = ({ navigation }) => {
 
-    // console.log(navigation);
-
-
     const { data, loading, error, updateData } = useContext(DataContext);
-    console.warn("Data: ",data)
+    console.warn("Data: ", data)
     const [retryCount, setRetryCount] = useState(0);
 
 
@@ -41,7 +38,7 @@ const HomeScreen = ({ navigation }) => {
 
         if (success) {
             Alert.alert("Success", "Data updated successfully!");
-            setRetryCount(0);   
+            setRetryCount(0);
         }
     };
 

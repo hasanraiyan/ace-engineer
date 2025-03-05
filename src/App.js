@@ -1,17 +1,19 @@
-import { Text, View } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
-import HomeScreen from './screens/HomeScreen';
-import SemesterScreen from './screens/SemesterScreen';
-import SubjectScreen from './screens/SubjectScreen';
-import SyllabusScreen from './screens/SyllabusScreen';
+// Import Screens
+import HomeScreen from "./screens/HomeScreen";
+import SemesterScreen from "./screens/SemesterScreen";
+import SubjectScreen from "./screens/SubjectScreen";
+import SyllabusScreen from "./screens/SyllabusScreen";
 
-import { DataProvider } from "./context/DataContext";
+// Import Context Provider
+import { DataProvider } from "./context/DataProvider";
 
 const Stack = createNativeStackNavigator();
 
 const App = () => {
+
     return (
         <DataProvider>
             <NavigationContainer >

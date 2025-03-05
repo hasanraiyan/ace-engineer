@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { View, Text, SafeAreaView, StatusBar, ActivityIndicator, TouchableOpacity , ScrollView } from 'react-native';
 import styles from '../styles/style';
 import { FontAwesome5 } from '@expo/vector-icons';
-import DataContext from '../context/DataContext';
+import { DataContext } from '../context/DataProvider';
 
 const SemesterScreen = ({ route, navigation }) => {
   // State to hold semesters
