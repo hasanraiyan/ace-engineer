@@ -3,7 +3,7 @@ import { getData, fetchFromRemote } from '../services/dataService'
 
 const DataContext = createContext();
 
-export const DataProvider = ({ Children }) => {
+export const DataProvider = ({ children }) => {
     const [data, setData] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -50,7 +50,7 @@ export const DataProvider = ({ Children }) => {
 
     return (
         <DataContext.Provider value={{ data, loading, error, updateData }} >
-            {Children}
+            {children}
         </DataContext.Provider>
     )
 

@@ -24,7 +24,7 @@ const fetchFromRemote = async () => {
 
         // Store the fetched data in AsyncStorage
         await AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(fetchedData));
-        console.log('Data fetched and cached successfully.');
+        console.log('Data fetched and cached successfully.',JSON.parse(fetchedData));
         return fetchedData;
     } catch (error) {
         console.error('Error fetching data from remote server:', error);
