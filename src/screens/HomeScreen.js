@@ -4,11 +4,16 @@ import { FontAwesome5 } from '@expo/vector-icons';
 import { StatusBar } from 'expo-status-bar';
 import DataContext from '../context/DataContext';
 import styles from '../styles/style'
-import { fetchFromRemote } from '../services/dataService';
 
 
 const HomeScreen = ({ navigation }) => {
+
+    // console.log(navigation);
+
+
     const { data, loading, error, updateData } = useContext(DataContext);
+    const [retryCount, setRetryCount] = useState(0);
+
 
     const [headerHeight, setHeaderHeight] = useState(0);
     const scrollContentStyle = {
@@ -19,8 +24,23 @@ const HomeScreen = ({ navigation }) => {
     //     console.log("Data in HomeScreen:", data);  
     // }, [data]);
 
+    const handleRetry = async () => {
+        setRetryCount(retryCount + 1);
+    
+        if (retryCount >= 2) {
+            Alert.alert(
+                "Network Issue",
+                "Unable to fetch data. Please check your internet connection or try again later.",
+                [{ text: "OK", onPress: () => setRetryCount(0) }]
+            );
+            return;
+        }
+    
+        await updateData(); 
+    };
+
     const BranchCard = ({ branch, onPress }) => {
-        console.log(branch)
+        // console.log(branch)
         return (
             <View style={styles.branchCardContainer}>
                 <TouchableOpacity style={[styles.branchCard, { borderLeftColor: branch.color }]}
@@ -57,7 +77,7 @@ const HomeScreen = ({ navigation }) => {
                 <FontAwesome5 name="exclamation-circle" size={50} color="#FF3B30" />
                 <Text style={styles.errorText}>{error}</Text>
 
-                <TouchableOpacity onPress={fetchFromRemote} style={styles.retryButton}>
+                <TouchableOpacity onPress={handleRetry} style={styles.retryButton}>
                     <Text style={styles.retryButtonText}>Retry</Text>
                 </TouchableOpacity>
             </View>
@@ -69,7 +89,7 @@ const HomeScreen = ({ navigation }) => {
             <StatusBar barStyle="light-content" />
             <View style={styles.headerContent} onLayout={(e) => {
                 setHeaderHeight(e.nativeEvent.layout.height);
-                console.log(e.nativeEvent.layout.height);
+                // console.log(e.nativeEvent.layout.height);
             }}>
                 <View style={styles.headerTitleContainer}>
                     <FontAwesome5 name="graduation-cap" size={32} color="#fff" style={styles.headerIcon} />
@@ -88,27 +108,25 @@ const HomeScreen = ({ navigation }) => {
                 showsVerticalScrollIndicator={false}
                 contentContainerStyle={[styles.scrollContent, scrollContentStyle]}
             >
-                {data && data.branches && data?.branches?.map((branch, index) => {
+                {data?.branches?.map((branch, index) => {                                                // console.log(branch)
+                 
+                    console.log([index, branch.name, data]);
                     return (
-                        <View key={index}>
-
                             <BranchCard
                                 key={index}
                                 branch={branch}
                                 onPress={() => {
                                     if (data) {
-                                        navigation.navigate('Semester', { branch: branch.name, data: data });
+                                        navigation.navigate('Semester', { branchName: branch.name, data: data });
                                     } else {
                                         console.warn('Data is not yet loaded, navigation prevented.');
                                     }
                                 }}
                             />
 
-                        </View>
                     )
                 })}
-
-                {/* <Text>Data: {JSON.stringify(data)}</Text> */}
+                
 
 
             </ScrollView>
