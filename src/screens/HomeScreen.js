@@ -12,6 +12,7 @@ const HomeScreen = ({ navigation }) => {
 
 
     const { data, loading, error, updateData } = useContext(DataContext);
+    console.warn("Data: ",data)
     const [retryCount, setRetryCount] = useState(0);
 
 
@@ -115,14 +116,14 @@ const HomeScreen = ({ navigation }) => {
             >
                 {data?.branches?.map((branch, index) => {                                                // console.log(branch)
 
-                    console.log([index, branch.name, data]);
+                    // console.log([index, branch.name, data]);
                     return (
                         <BranchCard
                             key={index}
                             branch={branch}
                             onPress={() => {
                                 if (data) {
-                                    navigation.navigate('Semester', { branchName: branch.name, data: data });
+                                    navigation.navigate('Semester', { branchName: branch.name });
                                 } else {
                                     console.warn('Data is not yet loaded, navigation prevented.');
                                 }
