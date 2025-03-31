@@ -36,7 +36,7 @@ const BranchListScreenComponent = ({ navigation }) => {
         accessibilityHint={`Navigates to semesters for ${item.name}`}
       />
     );
-  }, [navigation]); // navigation is stable
+  }, [navigation]); 
 
   const renderEmptyState = useCallback(() => (
     <EmptyState

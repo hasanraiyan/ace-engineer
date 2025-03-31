@@ -39,7 +39,7 @@ const AppNavigator = () => {
       <Stack.Screen
         name="BranchList"
         component={BranchListScreen}
-        options={{ title: 'Engineering Branches' }}
+        options={{ title: 'Engineering' }}
       />
       <Stack.Screen name="SemesterList" component={SemesterListScreen} />
       <Stack.Screen name="SubjectList" component={SubjectListScreen} />
