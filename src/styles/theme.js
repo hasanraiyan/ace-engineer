@@ -60,3 +60,20 @@ export const AppNavTheme = {
     border: COLORS.separator, // Used for header bottom border
   },
 };
+
+// Export a function to generate the nav theme
+export const getAppNavTheme = (isDarkMode) => {
+  const themeColors = isDarkMode ? darkColors : lightColors;
+  const baseNavTheme = isDarkMode ? DarkTheme : DefaultTheme;
+  return {
+    ...baseNavTheme,
+    colors: {
+      ...baseNavTheme.colors,
+      primary: themeColors.primary,
+      background: themeColors.background,
+      card: themeColors.card,
+      text: themeColors.text,
+      border: themeColors.separator,
+    },
+  };
+};
